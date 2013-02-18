@@ -1,0 +1,68 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>测试</title>
+        <style>
+
+        </style>
+        <script src="class.js"></script>
+        <script>
+
+            var Animal = JS.Class({
+                construct: function(name) {
+                    this.name = name;
+                },
+                shout: function(s) {
+                    console.log(s);
+                }
+            });
+
+            var animal = new Animal();
+            animal.shout('animal'); // animal
+     
+            var Dog = Animal.extend({
+                construct: function(name, age) {
+                    //调用父类构造器
+                    this.parent.construct.apply(this, arguments);
+                    this.age = age;
+                },
+                run: function(s) {
+                    console.log(s);
+                }
+            });
+            var dog = new Dog("dog", 4);
+            console.log(dog.name);
+            dog.shout("dog"); // dog
+            dog.run("run"); // run
+            console.log(dog.constructor + "")
+            var Shepherd = Dog.extend({
+                statics: {//静态成员
+                    TYPE: "Shepherd"
+                },
+                run: function() {//方法链,调用超类同名方法
+                    this.parent.run.call(this, "fast");
+                }
+            });
+            console.log(Shepherd.TYPE);//Shepherd
+            var shepherd = new Shepherd("shepherd", 5);
+            shepherd.run();//fast
+
+            var a = new Animal("xx");
+            console.log(a.run)
+        </script>
+    </head>
+
+    <body>
+        <select id="test-select">
+            <option id="test-opt"  value="1">0</option>
+            <option disabled>2</option>
+            <option disabled>3</option>
+        </select>
+        <a href="aaa">司徒正美</a>
+    </body>
+
+
+</html>
